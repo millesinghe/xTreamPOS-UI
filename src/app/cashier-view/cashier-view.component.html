@@ -1,0 +1,65 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+                <div class="col-md-4">
+					<div class="row">
+						<div class="col-md-8">
+                            <div><app-enteritem></app-enteritem></div>
+						</div>
+						<div class="col-md-4">
+                            <mat-form-field style="width: 100px;" class="example-full-width">
+                                <mat-label>Quantity</mat-label>
+                                <input matInput placeholder="00" value="" size="10">
+                            </mat-form-field>
+						</div>  
+					</div>
+					<div class="row"> 
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3 class="d-flex justify-content-center">
+                                        Total Item Price
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1 class="d-flex justify-content-center">
+                                        Total Item Price
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="example-button-row">
+                                <button mat-raised-button color="accent" style="width: 122px; height: 70px;">Add</button>
+                            </div>
+                        </div>
+					</div>
+                    <div class="row">
+						<div class="col-md-12">
+							<h3>
+								<app-filteritem></app-filteritem>
+							</h3>
+						</div>
+					</div>
+				</div>
+                <div class="col-md-8">
+					<div class="row">
+						<div class="col-md-12">
+							<app-cartitem></app-cartitem>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+						</div>
+						<div class="col-md-6">
+                            Total Price Indicate Here
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
