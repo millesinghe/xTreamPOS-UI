@@ -1,1 +1,22 @@
-<p>filteritem works!</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th style="width:60px">
+                Code
+            </th>
+            <th style="width:130px">
+                Item
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor='let item of itemList'>
+            <td style="width:60px; font-size: 13px;">
+                {{item.No}}
+            </td>
+            <td style="width:130px; font-size: 13px;">
+                {{item.Name}}
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -9,7 +9,29 @@ export class FilteritemComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  itemList;
 
+  ngOnInit(): void {
+    this.itemList = [
+      {No:"123456789012345",Name :"Milk 300g"},
+      {No:"222",Name :"Coffee 100g"},
+      {No:"333",Name :"Suger 200g"},
+      {No:"111",Name :"Milk 300g"},
+      {No:"222",Name :"Coffee 100g"},
+      {No:"333",Name :"Suger 200g"},
+      {No:"111",Name :"Milk 300g"},
+      {No:"222",Name :"Coffee 100g"},
+      {No:"333",Name :"Suger 200g"},
+      {No:"111",Name :"Milk 300g"},
+      {No:"222",Name :"Coffee 100g"},
+      {No:"333",Name :"Suger 200g"},
+      {No:"111",Name :"Milk 300g"},
+      {No:"222",Name :"Coffee 100g"},
+      {No:"333",Name :"Suger 200g"},
+      {No:"111",Name :"Milk 300g"},
+      {No:"222",Name :"Coffee 100g"},
+      {No:"333",Name :"Suger 200g"},
+      
+    ]
+  }
 }

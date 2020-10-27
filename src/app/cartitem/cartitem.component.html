@@ -1,89 +1,51 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th style="width:30px; text-align: center;">
                 #
             </th>
-            <th>
-                Product
+            <th style="width:130px; text-align: center;">
+                Code
             </th>
-            <th>
-                Payment Taken
+            <th style="width:330px; text-align: center;">
+                Item
             </th>
-            <th>
-                Status
+            <th style="width:130px; text-align: center;">
+                Unit Price
+            </th>
+            <th style="width:70px; text-align: center;">
+                Qty
+            </th>
+            <th style="width:130px; text-align: center;">
+                Price
+            </th>
+            <th style="width:30px; text-align: center;">
+                Remove
             </th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>
+        <tr *ngFor='let item of cartList'>
+            <td style="width:30px; font-size: 13px;">
                 1
             </td>
-            <td>
-                TB - Monthly
+            <td style="width:130px; font-size: 13px;">
+                {{item.No}}
             </td>
-            <td>
-                01/04/2012
+            <td style="width:330px; font-size: 13px;">
+                {{item.Name}}
             </td>
-            <td>
-                Default
+            <td style="width:130px; text-align: center; font-size: 13px;">
+                <input value= {{item.Unit}} style="text-align: center" size="10">
             </td>
-        </tr>
-        <tr class="table-active">
-            <td>
-                1
+            <td style="width:70px; text-align: center; font-size: 13px;">
+                <input value= {{item.Qty}}  style="text-align: center" size="10">
             </td>
-            <td>
-                TB - Monthly
+            <td style="width:130px; text-align: center; font-size: 13px;">
+                {{item.Unit}} * {{item.Qty}}
             </td>
-            <td>
-                01/04/2012
-            </td>
-            <td>
-                Approved
-            </td>
-        </tr>
-        <tr class="table-success">
-            <td>
-                2
-            </td>
-            <td>
-                TB - Monthly
-            </td>
-            <td>
-                02/04/2012
-            </td>
-            <td>
-                Declined
-            </td>
-        </tr>
-        <tr class="table-warning">
-            <td>
-                3
-            </td>
-            <td>
-                TB - Monthly
-            </td>
-            <td>
-                03/04/2012
-            </td>
-            <td>
-                Pending
-            </td>
-        </tr>
-        <tr class="table-danger">
-            <td>
-                4
-            </td>
-            <td>
-                TB - Monthly
-            </td>
-            <td>
-                04/04/2012
-            </td>
-            <td>
-                Call in to confirm
+            <td style="width:30px; font-size: 13px;">
+                <button mat-raised-button color="accent" style="font-size: 20px;">X</button>
             </td>
         </tr>
     </tbody>
