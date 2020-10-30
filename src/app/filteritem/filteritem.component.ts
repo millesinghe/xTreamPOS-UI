@@ -16,21 +16,7 @@ export class FilteritemComponent implements OnInit {
       {No:"123456789012345",Name :"Milk 300g"},
       {No:"222",Name :"Coffee 100g"},
       {No:"333",Name :"Suger 200g"},
-      {No:"111",Name :"Milk 300g"},
-      {No:"222",Name :"Coffee 100g"},
-      {No:"333",Name :"Suger 200g"},
-      {No:"111",Name :"Milk 300g"},
-      {No:"222",Name :"Coffee 100g"},
-      {No:"333",Name :"Suger 200g"},
-      {No:"111",Name :"Milk 300g"},
-      {No:"222",Name :"Coffee 100g"},
-      {No:"333",Name :"Suger 200g"},
-      {No:"111",Name :"Milk 300g"},
-      {No:"222",Name :"Coffee 100g"},
-      {No:"333",Name :"Suger 200g"},
-      {No:"111",Name :"Milk 300g"},
-      {No:"222",Name :"Coffee 100g"},
-      {No:"333",Name :"Suger 200g"},
+      
       
     ]
   }

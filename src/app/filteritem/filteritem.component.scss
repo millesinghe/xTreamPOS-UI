@@ -19,5 +19,14 @@ tbody {
   
   
   thead {
-    width: calc( 100% - 1em )
+    width: calc( 100%)
+  }
+
+  tbody > tr:hover {
+    background-color: blueviolet;
+    color: whitesmoke;
+  }
+
+  tbody > tr:not(:hover){
+    background-color: silver;
   }
