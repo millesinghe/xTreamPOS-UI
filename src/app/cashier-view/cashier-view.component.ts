@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ItemDataService} from "./../service/item-data.service"
 
 @Component({
   selector: 'app-cashier-view',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CashierViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private itemService:ItemDataService 
+    ) { }
 
   ngOnInit(): void {
   }
 
+  getfilterItemsbyId(){
+    console.log("Click Add btn")
+    console.log(this.itemService.retrieveItemsById());
+  }
 }
