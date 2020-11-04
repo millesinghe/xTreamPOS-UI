@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { strict } from 'assert';
 import {ItemDataService} from "./../service/item-data.service"
 
 @Component({
@@ -8,6 +9,11 @@ import {ItemDataService} from "./../service/item-data.service"
 })
 export class CashierViewComponent implements OnInit {
 
+  selectedItem : string;
+  filterItemName: string;
+  filterItemPrice : number;
+  itemList : []
+
   constructor(
     private itemService:ItemDataService 
     ) { }
@@ -15,8 +21,32 @@ export class CashierViewComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getfilterItemsbyId(){
+  addToCart(){
     console.log("Click Add btn")
-    console.log(this.itemService.retrieveItemsById());
+    
+    
+    console.log("-----END LINE ------");
+  }
+
+  onKeypressEvent(event: any){
+    let value = event.target.value;
+    if(value.length>0){
+      this.itemService.retrieveItemsById(value).subscribe(
+        response => this.handleResponse(response)
+      );
+    }
+ }
+
+  handleResponse(response){
+    console.log(">>>" +response);
+    this.itemList = response;
+
+    try{
+      this.filterItemName = response[0].itemName;
+      this.filterItemPrice = response[0].sellPrice;
+    } catch(e){
+      this.filterItemName = "-"
+      this.filterItemPrice = 0.00;
+    }    
   }
 }

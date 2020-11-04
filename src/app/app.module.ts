@@ -9,9 +9,11 @@ import { FilteritemComponent } from './filteritem/filteritem.component';
 import { CartitemComponent } from './cartitem/cartitem.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule} from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,8 +28,10 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FormsModule,
    
     MatInputModule,
+    MatFormFieldModule,
     MatButtonModule
   ],
   providers: [],

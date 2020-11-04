@@ -7,7 +7,10 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <div>
-                                    <app-enteritem></app-enteritem>
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Item Code</mat-label>
+                                        <input (keyup)="onKeypressEvent($event)" [(ngModel)]="selectedItem" class="back-white font-34" size="14" matInput placeholder="item-00" value="">
+                                    </mat-form-field> 
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -18,12 +21,12 @@
                             </div>
                         </div>
                         <div class="row" style="justify-content: center;margin-left: -5px; margin-right: -5px; background-color: silver; border-radius: 17px">
-                            <div id="ItemName">Maliban Biscut - 400g</div>
+                            <div id="ItemName">{{ filterItemName }}</div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="example-button-row" style="padding-top: 6px">
-                                    <button (click)="getfilterItemsbyId()" mat-raised-button color="accent"
+                                    <button (click)="addToCart()" mat-raised-button color="accent"
                                         style="width: 122px; height: 108px; font-size: 20px; padding: 10px; margin-top: 10px;">Add to
                                         Cart</button>
                                 </div>
@@ -37,7 +40,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <h3 class="d-flex justify-content-center font-20" style="color: silver; margin: 10px 0 10px;">
-                                            00.0
+                                            {{ filterItemPrice }}
                                         </h3>
                                     </div>
                                 </div>
