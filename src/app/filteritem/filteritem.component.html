@@ -10,12 +10,12 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor='let item of itemList' style="font-size: 13px;">
+        <tr (click)="selectedItem(item)" *ngFor='let item of itemList' style="font-size: 13px;">
             <td style="width:60px;">
-                {{item.No}}
+                {{item.itemNo}}
             </td>
             <td style="width:130px;">
-                {{item.Name}}
+                {{item.itemName}}
             </td>
         </tr>
     </tbody>

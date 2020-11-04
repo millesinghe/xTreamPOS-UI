@@ -12,13 +12,15 @@ export class CashierViewComponent implements OnInit {
   selectedItem : string;
   filterItemName: string;
   filterItemPrice : number;
-  itemList : []
+  itemList : [];
+  filterTotal : number;
 
   constructor(
     private itemService:ItemDataService 
     ) { }
 
   ngOnInit(): void {
+    this.filterTotal = 0.00
   }
 
   addToCart(){
@@ -28,25 +30,39 @@ export class CashierViewComponent implements OnInit {
     console.log("-----END LINE ------");
   }
 
-  onKeypressEvent(event: any){
+  onKeypressEvent(event: any) : void{
     let value = event.target.value;
     if(value.length>0){
       this.itemService.retrieveItemsById(value).subscribe(
-        response => this.handleResponse(response)
+        response => this.handleItemCodeSearch(response)
       );
+    } else {
+      //clear all
+      this.itemList = []
     }
  }
 
-  handleResponse(response){
-    console.log(">>>" +response);
+  handleItemCodeSearch(response) : void{  
     this.itemList = response;
+  }
 
+  filterFeedback(response) :void {
     try{
-      this.filterItemName = response[0].itemName;
-      this.filterItemPrice = response[0].sellPrice;
+      this.filterItemName = response.itemName;
+      this.filterItemPrice = response.sellPrice;
+      this.selectedItem = response.itemNo;
     } catch(e){
       this.filterItemName = "-"
       this.filterItemPrice = 0.00;
     }    
   }
+
+  calcTotalPrice() : void {
+    
+    let unitPrice : number = Number((<HTMLInputElement>document.getElementById("unitPrice")).textContent);
+    let qty : number = Number((<HTMLInputElement>document.getElementById("qty")).value);
+    this.filterTotal = unitPrice * qty
+    //var totalPrice = unitPrice * qty;
+  }
+
 }

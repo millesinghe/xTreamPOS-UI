@@ -25,8 +25,10 @@ tbody {
   tbody > tr:hover {
     background-color: blueviolet;
     color: whitesmoke;
+    font-weight: none; 
   }
 
   tbody > tr:not(:hover){
+    font-weight: bold; 
     background-color: silver;
   }
