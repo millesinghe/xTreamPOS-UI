@@ -9,14 +9,14 @@
                                 <div>
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Item Code</mat-label>
-                                        <input (keyup)="onKeypressEvent($event)" [(ngModel)]="selectedItem" class="back-white font-34" size="14" style="padding-left: 5px;padding-right: 5px" matInput placeholder="item-00" value="">
+                                        <input id="itemcode" (keyup)="onKeypressEvent($event)" [(ngModel)]="selectedItemModel" class="back-white font-34" size="14" style="padding-left: 5px;padding-right: 5px" matInput placeholder="item-00" value="">
                                     </mat-form-field> 
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <mat-form-field style="width: 100px;" class="example-full-width">
                                     <mat-label>Quantity</mat-label>
-                                    <input id="qty" (keyup)="calcTotalPrice()" class="back-white font-34" matInput placeholder="00" value="" size="10">
+                                    <input id="qty" [(ngModel)]="modelQty" (keyup)="calcTotalPrice()" class="back-white font-34" matInput placeholder="00" value="" size="10">
                                 </mat-form-field>
                             </div>
                         </div>
@@ -26,7 +26,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="example-button-row" style="padding-top: 6px">
-                                    <button (click)="calcTotalPrice()" mat-raised-button color="accent"
+                                    <button (click)="addToCart()" mat-raised-button color="accent"
                                         style="width: 122px; height: 108px; font-size: 20px; padding: 10px; margin-top: 10px;">Add to
                                         Cart</button>
                                 </div>
@@ -40,14 +40,14 @@
                                     </div>
                                     <div class="col-md-6">
                                         <h3 id = "unitPrice" class="d-flex justify-content-center font-20">
-                                            {{ filterItemPrice }}
+                                            {{ filterItemPrice | number:'1.2-2' }}
                                         </h3>
                                     </div>
                                 </div>
                                 <div class="row" style="padding-bottom: 10px; padding-right: 10px;">
                                     <div class="col-md-12 back-black alignT-18px">
                                         <h1 id="Total-Price" class="d-flex justify-content-center">
-                                            {{filterTotal}}
+                                            {{filterTotal | number:'1.2-2'}}
                                         </h1>
                                     </div>
                                 </div>
@@ -66,7 +66,7 @@
                 <div class="col-md-8">
                     <div class="row">
                         <div style="height: 585px;" class="col-md-12 curveCard" >
-                            <app-cartitem></app-cartitem>
+                            <app-cartitem [ItemCart] = "selectedCartItem"></app-cartitem>
                         </div>
                     </div>
                     <div style="padding: 5px;"></div>

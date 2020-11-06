@@ -1,49 +1,49 @@
 <table class="table">
     <thead style="background-color: #ff4081d4; color:whitesmoke; ">
         <tr>
-            <th style="width:30px; text-align: center;">
+            <th style="width:30px;" class="tableContent">
                 #
             </th>
-            <th style="width:130px; text-align: center;">
+            <th style="width:130px;" class="tableContent">
                 Code
             </th>
-            <th style="width:300px; text-align: center;">
+            <th style="width:300px;" class="tableContent">
                 Item
             </th>
-            <th style="width:130px;">
+            <th style="width:130px;" class="tableContent">
                 Unit Price
             </th>
-            <th style="width:70px; ">
+            <th style="width:70px;" class="tableContent">
                 Qty
             </th>
-            <th style="width:130px; text-align: center;">
+            <th style="width:130px;" class="tableContent">
                 Price
             </th>
-            <th style="width:30px; text-align: center;">
+            <th style="width:30px;" class="tableContent">
                 Remove
             </th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor='let item of cartList' style="background-color: silver;">
-            <td style="width:30px; font-size: 13px;">
+            <td style="width:42px; font-size: 13px;" class="tableContent">
                 1
             </td>
-            <td style="width:130px; font-size: 13px;">
-                {{item.No}}
+            <td style="width:130px; font-size: 13px;" class="tableContent">
+                {{item.itemNo}}
             </td>
-            <td style="width:330px; font-size: 13px;">
-                {{item.Name}}
+            <td style="width:302px; font-size: 13px;" class="tableContent">
+                {{item.itemName}}
             </td>
-            <td style="width:130px; text-align: center; font-size: 13px;">
-                <input value= {{item.Unit}} style="text-align: center" size="10">
+            <td style="width:130px; font-size: 13px;" class="tableContent">
+                <div style="text-align: center" size="10"> {{item.unitPrice | number:'1.2-2'}} </div>
             </td>
-            <td style="width:70px; text-align: center; font-size: 13px;">
-                <input value= {{item.Qty}}  style="text-align: center" size="10">
+            <td style="width:70px; font-size: 13px;" class="tableContent">
+                <div style="text-align: center" size="10"> {{item.qty}}  </div>
             </td>
-            <td style="width:130px; text-align: center; font-size: 13px;">
-                {{item.Unit * 1 * item.Qty * 1}}
-            <td style="width:30px; font-size: 13px;">
+            <td style="width:130px; font-size: 13px;" class="tableContent">
+                {{item.total | number:'1.2-2'}}
+            <td>
                 <button mat-raised-button  style="font-size: 20px; color:white; background-color:#a50202;">X</button>
             </td>
         </tr>

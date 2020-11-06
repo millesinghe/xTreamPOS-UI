@@ -6,7 +6,22 @@ export class ItemBean {
     public itemNo:string,
     public itemName:string,
     public sellPrice:number,
-    public cummulativeAmount:number
+    public cummulativeAmount:number,
+    public qty : number,
+    public total : number
+  ){
+
+  }
+}
+
+export class CartItemBean {
+  constructor(
+
+    public itemNo:string,
+    public itemName:string,
+    public unitPrice:number,
+    public qty:number,
+    public total : number
   ){
 
   }
@@ -22,6 +37,6 @@ export class ItemDataService {
   ) { }
 
   retrieveItemsById(filteringItem){
-    return this.http.get<ItemBean[]>("http://localhost:8080/item-id/"+ filteringItem);
+    return this.http.get<ItemBean[]>("http://192.168.1.120:8080/item-id/"+ filteringItem);
   }
 }

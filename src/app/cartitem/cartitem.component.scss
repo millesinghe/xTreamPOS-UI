@@ -7,8 +7,11 @@ tbody {
   
   thead tr {
     display: table;
-   
     table-layout: fixed;
+  }
+
+  .table td{
+    padding: 0.2rem;
   }
   
   thead, tbody tr {
@@ -19,4 +22,13 @@ tbody {
   
   thead {
     width: calc( 100%)
+  }
+
+  .tableContent {
+    text-align: center; 
+    vertical-align: middle !important
+  }
+
+  .table {
+    border-collapse: separate !important
   }

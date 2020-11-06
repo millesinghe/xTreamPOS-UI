@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { strict } from 'assert';
-import {ItemDataService} from "./../service/item-data.service"
+import {CartItemBean, ItemDataService} from "./../service/item-data.service"
 
 @Component({
   selector: 'app-cashier-view',
@@ -9,11 +9,14 @@ import {ItemDataService} from "./../service/item-data.service"
 })
 export class CashierViewComponent implements OnInit {
 
-  selectedItem : string;
+  filterItemCode : string;
   filterItemName: string;
   filterItemPrice : number;
   itemList : [];
+  selectedCartItem : CartItemBean;
   filterTotal : number;
+  modelQty : string;
+  selectedItemModel : string;
 
   constructor(
     private itemService:ItemDataService 
@@ -21,13 +24,36 @@ export class CashierViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.filterTotal = 0.00
+    this.filterItemPrice = 0.00
   }
 
-  addToCart(){
-    console.log("Click Add btn")
+  addToCart() : void{
+    this.resetFilter();
+    let item = {} as CartItemBean;
+
+    let itemcode : string = (<HTMLInputElement>document.getElementById("itemcode")).value;
+    let itemName : string = (<HTMLInputElement>document.getElementById("ItemName")).textContent;
+    let unitPrice : number = Number((<HTMLInputElement>document.getElementById("unitPrice")).textContent);
+    let qty : number = Number((<HTMLInputElement>document.getElementById("qty")).value);
     
-    
+    item.itemNo = itemcode
+    item.itemName = itemName;
+    item.qty = qty;
+    item.unitPrice = unitPrice;
+    item.total =  unitPrice * qty;
+    console.log(item);
+    this.selectedCartItem = item;
     console.log("-----END LINE ------");
+  }
+
+  resetFilter() : void {
+    this.filterTotal = 0.00;
+    this.filterItemPrice = 0.00;
+    this.filterItemName = "-";
+    this.selectedItemModel = ""
+    this.itemList = [];
+    this.modelQty = ''; 
+
   }
 
   onKeypressEvent(event: any) : void{
@@ -46,11 +72,13 @@ export class CashierViewComponent implements OnInit {
     this.itemList = response;
   }
 
-  filterFeedback(response) :void {
+  filterFeedback(item) :void {
     try{
-      this.filterItemName = response.itemName;
-      this.filterItemPrice = response.sellPrice;
-      this.selectedItem = response.itemNo;
+      this.filterItemName = item.itemName;
+      this.filterItemPrice = item.sellPrice;
+      this.selectedItemModel = item.itemNo;
+      let qty : number = Number((<HTMLInputElement>document.getElementById("qty")).value);
+      this.filterTotal = this.filterItemPrice * qty
     } catch(e){
       this.filterItemName = "-"
       this.filterItemPrice = 0.00;
@@ -58,11 +86,9 @@ export class CashierViewComponent implements OnInit {
   }
 
   calcTotalPrice() : void {
-    
     let unitPrice : number = Number((<HTMLInputElement>document.getElementById("unitPrice")).textContent);
     let qty : number = Number((<HTMLInputElement>document.getElementById("qty")).value);
     this.filterTotal = unitPrice * qty
-    //var totalPrice = unitPrice * qty;
   }
 
 }
