@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { CartItemBean } from '../service/item-data.service';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { CartItemBean } from '../model/cashierBean';
 
 @Component({
   selector: 'app-cartitem',
@@ -23,6 +23,7 @@ export class CartitemComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.cartList != undefined) {
       this.cartList.push(this.ItemCart);
+      this.calcsGrandTotal();
     }
   }
 
@@ -38,5 +39,17 @@ export class CartitemComponent implements OnInit {
 
   }
 
+  calcsGrandTotal() : void{
+    let billTotal = 0.00;
+    for (let item of this.cartList) {
+      billTotal = billTotal + item.total
+    }
+    this.billTotalAmountEmitter.emit(billTotal);
+    console.log(billTotal)
+  }
+
+
   @Input() ItemCart: CartItemBean[];
+
+  @Output() billTotalAmountEmitter : EventEmitter<any> = new EventEmitter<any>();
 }

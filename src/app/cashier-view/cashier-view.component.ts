@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { strict } from 'assert';
-import {CartItemBean, ItemDataService} from "./../service/item-data.service"
+import { CartItemBean, ItemBean } from '../model/cashierBean';
+import { ItemDataService } from '../service/item-data.service';
 
 @Component({
   selector: 'app-cashier-view',
@@ -12,19 +12,30 @@ export class CashierViewComponent implements OnInit {
   filterItemCode : string;
   filterItemName: string;
   filterItemPrice : number;
-  itemList : [];
+  itemList : ItemBean[];
   selectedCartItem : CartItemBean;
   filterTotal : number;
   modelQty : string;
   selectedItemModel : string;
+  billTotal: number;
+  billDiscount : number;
+  grandTotal : number;
 
   constructor(
     private itemService:ItemDataService 
     ) { }
 
   ngOnInit(): void {
-    this.filterTotal = 0.00
-    this.filterItemPrice = 0.00
+    this.filterTotal = 0.00;
+    this.filterItemPrice = 0.00;
+    this.billTotal = 0.00
+    this.billDiscount = 0.00;
+    this.grandTotal = this.billTotal - this.billDiscount;
+  }
+
+  getBillTotal(event) :void {
+    this.billTotal = event;
+    this.grandTotal = this.billTotal - this.billDiscount;
   }
 
   addToCart() : void{
@@ -56,6 +67,11 @@ export class CashierViewComponent implements OnInit {
 
   }
 
+  onDiscountKeypress(event: any) : void{
+    this.billDiscount = event.target.value;
+    this.grandTotal = this.billTotal - this.billDiscount;
+  }
+
   onKeypressEvent(event: any) : void{
     let value = event.target.value;
     if(value.length>0){
@@ -63,7 +79,6 @@ export class CashierViewComponent implements OnInit {
         response => this.handleItemCodeSearch(response)
       );
     } else {
-      //clear all
       this.itemList = []
     }
  }

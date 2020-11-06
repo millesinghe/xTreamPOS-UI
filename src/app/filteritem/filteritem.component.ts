@@ -1,6 +1,6 @@
 import { Input, Output, EventEmitter } from '@angular/core';
 import { Component, OnInit,  OnChanges, SimpleChanges } from '@angular/core';
-import { ItemBean } from '../service/item-data.service';
+import { ItemBean } from '../model/cashierBean';
 
 @Component({
   selector: 'app-filteritem',
@@ -26,10 +26,10 @@ export class FilteritemComponent implements OnInit, OnChanges {
   }
 
   selectedItem(item) : void{
-    this.selectedItemByFilter.emit(item);
+    this.selectedItemByFilterEmitter.emit(item);
   }
 
   @Input() selectedItemList: ItemBean[];
 
-  @Output() selectedItemByFilter: EventEmitter<any> = new EventEmitter<any>();
+  @Output() selectedItemByFilterEmitter: EventEmitter<any> = new EventEmitter<any>();
 }
