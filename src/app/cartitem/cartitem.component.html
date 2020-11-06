@@ -25,9 +25,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor='let item of cartList' style="background-color: silver;">
+        <tr *ngFor='let item of cartList;let indexOfelement=index;' style="background-color: silver;">
             <td style="width:42px; font-size: 13px;" class="tableContent">
-                1
+                {{indexOfelement + 1}}
             </td>
             <td style="width:130px; font-size: 13px;" class="tableContent">
                 {{item.itemNo}}
@@ -44,7 +44,7 @@
             <td style="width:130px; font-size: 13px;" class="tableContent">
                 {{item.total | number:'1.2-2'}}
             <td>
-                <button mat-raised-button  style="font-size: 20px; color:white; background-color:#a50202;">X</button>
+                <button (click)="removeItem($event)" id="btn_{{indexOfelement}}" mat-raised-button  style="font-size: 20px; color:white; background-color:#a50202;">X</button>
             </td>
         </tr>
     </tbody>

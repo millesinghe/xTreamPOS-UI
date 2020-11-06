@@ -23,8 +23,19 @@ export class CartitemComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.cartList != undefined) {
       this.cartList.push(this.ItemCart);
-      console.log("++>"+this.cartList)
     }
+  }
+
+  removeItem(event): void{
+    let removeButton :string =event.currentTarget.id;
+    let aa = removeButton.split('btn_');
+    let removeId : number = Number(removeButton.split('btn_')[1]);
+    let bb = this.cartList;
+    this.cartList.splice(removeId,1)
+    let cc = this.cartList;
+
+    console.log(removeId)
+
   }
 
   @Input() ItemCart: CartItemBean[];
