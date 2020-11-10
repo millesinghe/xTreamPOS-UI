@@ -34,7 +34,7 @@ export class CartitemComponent implements OnInit {
     let bb = this.cartList;
     this.cartList.splice(removeId,1)
     let cc = this.cartList;
-
+    this.calcsGrandTotal();
     console.log(removeId)
 
   }
