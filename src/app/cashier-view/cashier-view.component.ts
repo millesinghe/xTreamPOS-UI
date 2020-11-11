@@ -32,7 +32,6 @@ export class CashierViewComponent implements OnInit {
     this.billDiscount = 0.00;
     this.grandTotal = this.billTotal - this.billDiscount;
   }
-
   
   getBillTotal(event) :void {
     this.billTotal = event;
