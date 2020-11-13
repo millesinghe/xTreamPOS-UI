@@ -9,37 +9,47 @@
                                 <div>
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Item Code</mat-label>
-                                        <input id="itemcode" (keyup)="onKeypressEvent($event)" [(ngModel)]="selectedItemModel" class="back-white font-34" size="14" style="padding-left: 5px;padding-right: 5px" matInput placeholder="item-00" value="">
-                                    </mat-form-field> 
+                                        <input #input on-focus="onInputFocus()" on-focusout="DeChange()" id="itemcode"
+                                            (keyup)="onKeypressEvent($event)" [(ngModel)]="selectedItemModel"
+                                            class="back-white font-34" size="14"
+                                            style="padding-left: 5px;padding-right: 5px" matInput placeholder="item-00"
+                                            value={{selectedItemModel}}>
+                                    </mat-form-field>
+                                    <div  class="simple-keyboard"></div>
                                 </div>
+
                             </div>
                             <div class="col-md-4">
                                 <mat-form-field style="width: 100px;" class="example-full-width">
                                     <mat-label>Quantity</mat-label>
-                                    <input id="qty" [(ngModel)]="modelQty" (keyup)="calcTotalPrice()" class="back-white font-34" matInput placeholder="00" value="" size="10">
+                                    <input id="qty" [(ngModel)]="modelQty" (keyup)="calcTotalPrice()"
+                                        class="back-white font-34" matInput placeholder="00" value="" size="10">
                                 </mat-form-field>
                             </div>
                         </div>
-                        <div class="row" style="justify-content: center;margin-left: -5px; margin-right: -5px; background-color: silver; border-radius: 17px">
+                        <div class="row"
+                            style="justify-content: center;margin-left: -5px; margin-right: -5px; background-color: silver; border-radius: 17px">
                             <div id="ItemName">{{ filterItemName }}</div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="example-button-row" style="padding-top: 6px">
                                     <button (click)="addToCart()" mat-raised-button color="accent"
-                                        style="width: 122px; height: 108px; font-size: 20px; padding: 10px; margin-top: 10px;">Add to
+                                        style="width: 122px; height: 108px; font-size: 20px; padding: 10px; margin-top: 10px;">Add
+                                        to
                                         Cart</button>
                                 </div>
                             </div>
                             <div class="col-md-8">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h3 class="d-flex justify-content-center font-20" style="color: silver; margin: 10px 0 10px;">
+                                        <h3 class="d-flex justify-content-center font-20"
+                                            style="color: silver; margin: 10px 0 10px;">
                                             Unit Price :
                                         </h3>
                                     </div>
                                     <div class="col-md-6">
-                                        <h3 id = "unitPrice" class="d-flex justify-content-center font-20">
+                                        <h3 id="unitPrice" class="d-flex justify-content-center font-20">
                                             {{ filterItemPrice | number:'1.2-2' }}
                                         </h3>
                                     </div>
@@ -58,22 +68,25 @@
                     <div class="curveCard">
                         <div class="row">
                             <div class="col-md-12">
-                                <app-filteritem (selectedItemByFilterEmitter)="filterFeedback($event)" [selectedItemList] = "itemList"></app-filteritem>
+                                <app-filteritem (selectedItemByFilterEmitter)="filterFeedback($event)"
+                                    [selectedItemList]="itemList"></app-filteritem>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="row">
-                        <div style="height: 585px;" class="col-md-12 curveCard" >
-                            <app-cartitem (billTotalAmountEmitter)="getBillTotal($event)" [ItemCart] = "selectedCartItem"></app-cartitem>
+                        <div style="height: 585px;" class="col-md-12 curveCard">
+                            <app-cartitem (billTotalAmountEmitter)="getBillTotal($event)" [ItemCart]="selectedCartItem">
+                            </app-cartitem>
                         </div>
                     </div>
                     <div style="padding: 5px;"></div>
                     <div class="row back-gray curveCard">
                         <div class="col-md-6">
                             <!-- Cashier Buttons -->
-                            <button mat-raised-button color="primary" style="font-size: 20px;">Payment</button>
+                            <button (click)="actionPayment()" mat-raised-button color="primary"
+                                style="font-size: 20px;">Payment</button>
                         </div>
                         <div class="col-md-6">
                             <div class="row">
@@ -95,7 +108,8 @@
                                     </h3>
                                 </div>
                                 <div class="col-md-4" style="text-align: end">
-                                    <input (keyup)="onDiscountKeypress($event)" value="{{billDiscount | number:'1.2-2' }}"  style="text-align: end" size="10">
+                                    <input (keyup)="onDiscountKeypress($event)"
+                                        value="{{billDiscount | number:'1.2-2' }}" style="text-align: end" size="10">
                                 </div>
                             </div>
                             <div class="row">

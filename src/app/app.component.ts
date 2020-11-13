@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-
+import { CashierViewComponent } from "./cashier-view/cashier-view.component";
 
 export enum KEY_CODE {
   ArrowRight = 39,
@@ -33,6 +33,7 @@ export class AppComponent {
 
     if (event.ctrlKey && event.keyCode === KEY_CODE.ArrowDown) {
       console.log("Key Binding");
+      CashierViewComponent.setfocus()
     }
   }
 

@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { CartItemBean } from './model/cashierBean';
+import { NgNumericKeyboardModule } from 'ng-numeric-keyboard';
 
 @NgModule({
   declarations: [
@@ -30,10 +31,12 @@ import { CartItemBean } from './model/cashierBean';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+
+    NgNumericKeyboardModule,
    
     MatInputModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

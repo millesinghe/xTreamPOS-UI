@@ -23,8 +23,10 @@
     "@angular/router": "~10.2.0",
     "bootstrap": "^4.5.0",
     "jquery": "^3.5.1",
+    "ng-numeric-keyboard": "^1.0.1",
     "popper.js": "^1.14.3",
     "rxjs": "~6.6.0",
+    "simple-keyboard": "^2.32.37",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
