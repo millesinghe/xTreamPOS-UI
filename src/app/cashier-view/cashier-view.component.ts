@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { element } from 'protractor';
 import Keyboard from 'simple-keyboard';
+import { AppConfigService } from 'src/config/app-config.service';
+import { AppConfig } from 'src/config/AppConfig';
 import { CartItemBean, ItemBean } from '../model/cashierBean';
 import { GlobalRule } from '../model/validator';
 import { ItemDataService } from '../service/item-data.service';
@@ -12,9 +14,10 @@ import { ItemDataService } from '../service/item-data.service';
 })
 export class CashierViewComponent implements OnInit {
 
-
+  protected host = AppConfigService.properties.server;
+  
   static setfocus() {
-    let aa = new CashierViewComponent(null);
+    let aa = new CashierViewComponent();
     aa.setfocustemCode();
   }
 
@@ -33,8 +36,9 @@ export class CashierViewComponent implements OnInit {
   keyboard: Keyboard;
   cursor: string;
 
+  
   constructor(
-    private itemService: ItemDataService
+    private itemService?: ItemDataService
   ) { }
 
   ngOnInit(): void {
@@ -55,6 +59,7 @@ export class CashierViewComponent implements OnInit {
         ]
       }
     });
+    console.log("Based --> " + this.host.baseURL)
   }
 
   setfocustemCode(): void {
@@ -101,7 +106,7 @@ export class CashierViewComponent implements OnInit {
     this.getDiscountCalc();
   }
 
-  getDiscountCalc() :void{
+  getDiscountCalc(): void {
     this.grandTotal = this.billTotal - this.billDiscount;
   }
 
@@ -110,7 +115,7 @@ export class CashierViewComponent implements OnInit {
     this.callItemFilter(value);
   }
 
-  callItemFilter(value) : void {
+  callItemFilter(value): void {
     if (value.length > 0) {
       this.itemService.retrieveItemsById(value).subscribe(
         response => this.handleItemCodeSearch(response)
@@ -144,22 +149,22 @@ export class CashierViewComponent implements OnInit {
   calcTotalPrice(qtyUpdate): void {
     let unitPrice: number = Number((<HTMLInputElement>document.getElementById("unitPrice")).textContent);
     let qty: number
-    if (qtyUpdate == null){
+    if (qtyUpdate == null) {
       qty = Number((<HTMLInputElement>document.getElementById("qty")).value);
     }
     else {
       qty = qtyUpdate;
     }
-      this.filterTotal = unitPrice * qty
+    this.filterTotal = unitPrice * qty
   }
 
   // a
 
-  onInputFocus(inpuId) :void {
-    if(this.cursor != inpuId.id){
+  onInputFocus(inpuId): void {
+    if (this.cursor != inpuId.id) {
       this.keyboard.clearInput();
       this.cursor = inpuId.id;
-    }  
+    }
   }
 
   DeChange() {
@@ -167,7 +172,7 @@ export class CashierViewComponent implements OnInit {
   }
 
   onChange = (input: string) => {
-   
+
     switch (this.cursor) {
       case "itemcode": {
         this.selectedItemModel = input;
@@ -176,7 +181,7 @@ export class CashierViewComponent implements OnInit {
       }
       case "qty": {
         let status = GlobalRule.validateDecimal(input)
-        if (status){
+        if (status) {
           this.modelQty = input;
           this.calcTotalPrice(this.modelQty);
         }
@@ -184,7 +189,7 @@ export class CashierViewComponent implements OnInit {
       }
       case "discount": {
         let status = GlobalRule.validateDecimal(input)
-        if (status){
+        if (status) {
           this.billDiscount = Number(input);
           this.getDiscountCalc();
         }
