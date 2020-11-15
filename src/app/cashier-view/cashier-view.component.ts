@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { element } from 'protractor';
 import Keyboard from 'simple-keyboard';
 import { AppConfigService } from 'src/config/app-config.service';
-import { AppConfig } from 'src/config/AppConfig';
 import { CartItemBean, ItemBean } from '../model/cashierBean';
 import { GlobalRule } from '../model/validator';
 import { ItemDataService } from '../service/item-data.service';
@@ -83,12 +82,11 @@ export class CashierViewComponent implements OnInit {
   }
 
   addToCart(): void {
-    this.resetFilter();
     let item = {} as CartItemBean;
 
     let itemcode: string = (<HTMLInputElement>document.getElementById("itemcode")).value;
     let itemName: string = (<HTMLInputElement>document.getElementById("ItemName")).textContent;
-    let unitPrice: number = Number((<HTMLInputElement>document.getElementById("unitPrice")).textContent);
+    let unitPrice: number = Number(this.filterItemPrice);
     let qty: number = Number((<HTMLInputElement>document.getElementById("qty")).value);
 
     item.itemNo = itemcode
@@ -98,6 +96,8 @@ export class CashierViewComponent implements OnInit {
     item.total = unitPrice * qty;
     console.log(item);
     this.selectedCartItem = item;
+    
+    this.resetFilter();
     console.log("-----END LINE ------");
   }
 
@@ -147,7 +147,7 @@ export class CashierViewComponent implements OnInit {
   }
 
   calcTotalPrice(qtyUpdate): void {
-    let unitPrice: number = Number((<HTMLInputElement>document.getElementById("unitPrice")).textContent);
+    let unitPrice: number =this.filterItemPrice;
     let qty: number
     if (qtyUpdate == null) {
       qty = Number((<HTMLInputElement>document.getElementById("qty")).value);
