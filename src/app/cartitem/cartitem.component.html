@@ -1,12 +1,6 @@
 <table class="table">
     <thead style="background-color: #ff4081d4; color:whitesmoke; ">
         <tr>
-            <th style="width:30px;" class="tableContent">
-                #
-            </th>
-            <th style="width:130px;" class="tableContent">
-                Code
-            </th>
             <th style="width:300px;" class="tableContent">
                 Item
             </th>
@@ -26,12 +20,6 @@
     </thead>
     <tbody>
         <tr *ngFor='let item of cartList;let indexOfelement=index;' style="background-color: silver;">
-            <td style="width:42px; font-size: 13px;" class="tableContent">
-                {{indexOfelement + 1}}
-            </td>
-            <td style="width:130px; font-size: 13px;" class="tableContent">
-                {{item.itemNo}}
-            </td>
             <td style="width:302px; font-size: 13px;" class="tableContent">
                 {{item.itemName}}
             </td>

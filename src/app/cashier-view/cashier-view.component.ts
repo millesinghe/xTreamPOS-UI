@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { element } from 'protractor';
 import Keyboard from 'simple-keyboard';
 import { CartItemBean, ItemBean } from '../model/cashierBean';
+import { GlobalRule } from '../model/validator';
 import { ItemDataService } from '../service/item-data.service';
 
 @Component({
@@ -29,6 +30,9 @@ export class CashierViewComponent implements OnInit {
   billDiscount: number;
   grandTotal: number;
 
+  keyboard: Keyboard;
+  cursor: string;
+
   constructor(
     private itemService: ItemDataService
   ) { }
@@ -39,11 +43,33 @@ export class CashierViewComponent implements OnInit {
     this.billTotal = 0.00
     this.billDiscount = 0.00;
     this.grandTotal = this.billTotal - this.billDiscount;
+
+    this.keyboard = new Keyboard({
+      onChange: input => this.onChange(input),
+      onKeyPress: button => this.onKeyPress(button),
+      layout: {
+        'default': [
+          '1 2 3', '4 5 6', '7 8 9', '. 0 {bksp}',
+        ],
+        'shift': [
+        ]
+      }
+    });
   }
 
   setfocustemCode(): void {
     document.getElementById("itemcode").focus()
     console.log("..........focused")
+  }
+
+  resetFilter(): void {
+    this.filterTotal = 0.00;
+    this.filterItemPrice = 0.00;
+    this.filterItemName = "-";
+    this.selectedItemModel = ""
+    this.itemList = [];
+    this.modelQty = '';
+
   }
 
   getBillTotal(event): void {
@@ -70,23 +96,21 @@ export class CashierViewComponent implements OnInit {
     console.log("-----END LINE ------");
   }
 
-  resetFilter(): void {
-    this.filterTotal = 0.00;
-    this.filterItemPrice = 0.00;
-    this.filterItemName = "-";
-    this.selectedItemModel = ""
-    this.itemList = [];
-    this.modelQty = '';
-
-  }
-
   onDiscountKeypress(event: any): void {
     this.billDiscount = event.target.value;
+    this.getDiscountCalc();
+  }
+
+  getDiscountCalc() :void{
     this.grandTotal = this.billTotal - this.billDiscount;
   }
 
   onKeypressEvent(event: any): void {
     let value = event.target.value;
+    this.callItemFilter(value);
+  }
+
+  callItemFilter(value) : void {
     if (value.length > 0) {
       this.itemService.retrieveItemsById(value).subscribe(
         response => this.handleItemCodeSearch(response)
@@ -117,36 +141,61 @@ export class CashierViewComponent implements OnInit {
     }
   }
 
-  calcTotalPrice(): void {
+  calcTotalPrice(qtyUpdate): void {
     let unitPrice: number = Number((<HTMLInputElement>document.getElementById("unitPrice")).textContent);
-    let qty: number = Number((<HTMLInputElement>document.getElementById("qty")).value);
-    this.filterTotal = unitPrice * qty
+    let qty: number
+    if (qtyUpdate == null){
+      qty = Number((<HTMLInputElement>document.getElementById("qty")).value);
+    }
+    else {
+      qty = qtyUpdate;
+    }
+      this.filterTotal = unitPrice * qty
   }
 
   // a
 
-  keyboard: Keyboard;
- 
-  onInputFocus() {
-    this.keyboard = new Keyboard({
-      onChange: input => this.onChange(input),
-      onKeyPress: button => this.onKeyPress(button),
-      layout: {
-        'default': [
-          '1 2 3','4 5 6','7 8 9','0 {bksp}',
-        ],
-        'shift': [
-        ]
-      }
-    });
+  onInputFocus(inpuId) :void {
+    if(this.cursor != inpuId.id){
+      this.keyboard.clearInput();
+      this.cursor = inpuId.id;
+    }  
   }
 
   DeChange() {
-    
+
   }
 
   onChange = (input: string) => {
-    this.selectedItemModel = input;
+   
+    switch (this.cursor) {
+      case "itemcode": {
+        this.selectedItemModel = input;
+        this.callItemFilter(this.selectedItemModel);
+        break;
+      }
+      case "qty": {
+        let status = GlobalRule.validateDecimal(input)
+        if (status){
+          this.modelQty = input;
+          this.calcTotalPrice(this.modelQty);
+        }
+        break;
+      }
+      case "discount": {
+        let status = GlobalRule.validateDecimal(input)
+        if (status){
+          this.billDiscount = Number(input);
+          this.getDiscountCalc();
+        }
+        break;
+      }
+      default: {
+        //statements; 
+        return;
+      }
+    }
+
     console.log('Input changed', input);
   };
 

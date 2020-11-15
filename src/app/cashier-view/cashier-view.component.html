@@ -5,42 +5,30 @@
                 <div class="col-md-4">
                     <div class="curveCard">
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-12 center">
                                 <div>
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Item Code</mat-label>
-                                        <input #input on-focus="onInputFocus()" on-focusout="DeChange()" id="itemcode"
+                                        <input on-focus="onInputFocus(itemcode)" on-focusout="DeChange()" #itemcode id='itemcode'
                                             (keyup)="onKeypressEvent($event)" [(ngModel)]="selectedItemModel"
                                             class="back-white font-34" size="14"
                                             style="padding-left: 5px;padding-right: 5px" matInput placeholder="item-00"
                                             value={{selectedItemModel}}>
                                     </mat-form-field>
-                                    <div  class="simple-keyboard"></div>
                                 </div>
-
                             </div>
-                            <div class="col-md-4">
-                                <mat-form-field style="width: 100px;" class="example-full-width">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 center">
+                                <mat-form-field class="example-full-width">
                                     <mat-label>Quantity</mat-label>
-                                    <input id="qty" [(ngModel)]="modelQty" (keyup)="calcTotalPrice()"
+                                    <input #qty on-focus="onInputFocus(qty)" id="qty" [(ngModel)]="modelQty" (keyup)="calcTotalPrice(null)"
                                         class="back-white font-34" matInput placeholder="00" value="" size="10">
                                 </mat-form-field>
                             </div>
                         </div>
-                        <div class="row"
-                            style="justify-content: center;margin-left: -5px; margin-right: -5px; background-color: silver; border-radius: 17px">
-                            <div id="ItemName">{{ filterItemName }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="example-button-row" style="padding-top: 6px">
-                                    <button (click)="addToCart()" mat-raised-button color="accent"
-                                        style="width: 122px; height: 108px; font-size: 20px; padding: 10px; margin-top: 10px;">Add
-                                        to
-                                        Cart</button>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
+                        <div class="row ">
+                            <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h3 class="d-flex justify-content-center font-20"
@@ -54,7 +42,7 @@
                                         </h3>
                                     </div>
                                 </div>
-                                <div class="row" style="padding-bottom: 10px; padding-right: 10px;">
+                                <div class="row" style="padding-bottom: 10px; padding-left: 5px; padding-right: 5px;">
                                     <div class="col-md-12 back-black alignT-18px">
                                         <h1 id="Total-Price" class="d-flex justify-content-center">
                                             {{filterTotal | number:'1.2-2'}}
@@ -75,50 +63,68 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <div class="row">
-                        <div style="height: 585px;" class="col-md-12 curveCard">
-                            <app-cartitem (billTotalAmountEmitter)="getBillTotal($event)" [ItemCart]="selectedCartItem">
-                            </app-cartitem>
+                    <div class="row back-gray curveCard">
+                        <div class="col-md-8">
+                            <div class="simple-keyboard"></div>
+                        </div>
+                        <div class="col-md-4 centerVH">
+                            <div class="example-button-row center" style="padding-top: 6px">
+                                <button (click)="addToCart()" mat-raised-button color="accent"
+                                    style="width: 122px; height: 108px; font-size: 20px; padding: 10px; margin-top: 10px;">Add
+                                    to
+                                    Cart</button>
+                            </div>
                         </div>
                     </div>
                     <div style="padding: 5px;"></div>
                     <div class="row back-gray curveCard">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
+                            <div class="row"
+                                style="justify-content: center;margin-left: -5px; margin-right: -5px; background-color: silver; border-radius: 17px">
+                                <div id="ItemName"> {{ filterItemName }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding: 5px;"></div>
+                    <div class="row back-gray curveCard">
+                        <div class="col-md-4">
+                            <div class="simple-keyboard"></div>
+                            <div style="padding: 5px;"></div>
                             <!-- Cashier Buttons -->
                             <button (click)="actionPayment()" mat-raised-button color="primary"
                                 style="font-size: 20px;">Payment</button>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-7">
                                     <h3 style="color:  rgb(214, 236, 10); text-align: end;">
                                         Total Price
                                     </h3>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <h3 style="color:  rgb(214, 236, 10); text-align: end;">
                                         {{billTotal| number:'1.2-2' }}
                                     </h3>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-7">
                                     <h3 style="color: rgb(214, 231, 57); text-align: end;">
                                         Discount
                                     </h3>
                                 </div>
-                                <div class="col-md-4" style="text-align: end">
-                                    <input (keyup)="onDiscountKeypress($event)"
+                                <div class="col-md-5" style="text-align: end">
+                                    <input on-focus="onInputFocus(discount)" #discount id="discount" (keyup)="onDiscountKeypress($event)"
                                         value="{{billDiscount | number:'1.2-2' }}" style="text-align: end" size="10">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-7">
                                     <h1 style="color: white; text-align: end;">
                                         Grand Total
                                     </h1>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <h1 style="color: white; text-align: end;">
                                         {{grandTotal | number:'1.2-2' }}
                                     </h1>
@@ -126,6 +132,14 @@
                             </div>
                         </div>
                     </div>
+                    <div style="padding: 5px;"></div>
+                    <div class="row">
+                        <div style="height: 585px;" class="col-md-12 curveCard">
+                            <app-cartitem (billTotalAmountEmitter)="getBillTotal($event)" [ItemCart]="selectedCartItem">
+                            </app-cartitem>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

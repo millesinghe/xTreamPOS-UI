@@ -2,6 +2,16 @@
 	background: black;
 }
 
+.center{
+    text-align: center;
+}
+
+.centerVH{
+    align-items: center;
+    display: flex;
+    justify-content: center
+}
+
 .back-white {
 	background: white;
 }
@@ -14,7 +24,6 @@
 	background: #80808082;
 }
 
-
 .alignT-18px{
     padding-top: 18px;
 }
@@ -24,7 +33,7 @@
 }
 
 .font-20{
-    font-size: 20px;
+    font-size: 15px;
 }
 
 #ItemName{
